@@ -7,10 +7,10 @@
  */
 
 /* * * * * * * * * *
- *    Release 1    *
+ *    Release 2    *
  * * * * * * * * * */
 
-/* Allow Users to add and view pets. */
+/* Allow Users to add pets, view pets, search names and search ages */
 
 import java.util.Scanner;
 import Pet.Pet;
@@ -30,34 +30,49 @@ public class PetDatabase {
       System.out.println();
       userChoice = getUserChoice();
 
-      // Call corresponding method or exit the program
-      if (userChoice == 1) {
-        viewAllPets();
-      } else if (userChoice == 2) {
-        addPets();
-      } else {
-        System.out.println("Goodbye!");
+      switch (userChoice) {
+        case 1 -> {
+          viewAllPets(); 
+          break;
+        }
+        case 2 -> {
+          addPets();
+          break;
+        }
+        case 3 -> {
+          searchPetsByName();
+          break;
+        }
+        case 4 -> {
+          searchPetsByAge();
+          break;
+        }
+        default -> {
+          System.out.println("Goodbye!");
+        }
       }
-    // Run while user does not enter 3
-    } while (userChoice != 3);
+    // Run while user does not enter 5
+    } while (userChoice != 5);
   }
 
   // Method to get the choice of the method the user wants to run.
   private static int getUserChoice() {
     int userChoice = 0;
-    // Make sure user enters 1 - 3
-    while (userChoice < 1 || userChoice > 3) {
+    // Make sure user enters 1 - 5
+    while (userChoice < 1 || userChoice > 5) {
       // Print options
       System.out.println("What would you like to do?");
       System.out.println(" 1) View all pets");
       System.out.println(" 2) Add more pets");
-      System.out.println(" 3) Exit program");
+      System.out.println(" 3) Search pets by name");
+      System.out.println(" 4) Search pets by age");
+      System.out.println(" 5) Exit program");
       System.out.print("Your choice: ");
       userChoice = s.nextInt();
 
       // Print error handling message if they enter an invalid number
-      if (userChoice < 1 || userChoice > 3) {
-        System.out.println("Enter a number 1 - 3");
+      if (userChoice < 1 || userChoice > 5) {
+        System.out.println("Enter a number 1 - 5");
       }
       System.out.println();
     }
@@ -94,6 +109,64 @@ public class PetDatabase {
         }
       }
     }
+  }
+
+  // Method to search all pets and display only those with matching name.
+  private static void searchPetsByName() {
+    Pet currentPet;
+
+    // Get pet name to search and store in lowercase for consistancy.
+    System.out.print("Enter a name to search: ");
+    String searchName = s.next().toLowerCase();
+
+    // We need a search count to display the number of rows.
+    int searchCount = 0;
+
+    printTableHeader();
+
+    // Iterate over each pet in the database.
+    for (int i = 0; i < pets.length; i++) {
+      currentPet = pets[i];
+
+      // Once we hit a null value break from the loop
+      if (currentPet == null) break;
+  
+      // Check whether currentPets name is the searched name if so print row.
+      if (currentPet.getName().toLowerCase().equals(searchName)) {
+        printTableRow(i, currentPet.getName(), currentPet.getAge());
+        searchCount++;
+      }
+    }
+    printTableFooter(searchCount);
+  }
+
+  // Method to search all pets and display only those with matching age.
+  private static void searchPetsByAge() {
+    Pet currentPet;
+
+    // Get pet age to search and store.
+    System.out.print("Enter age to search: ");
+    int searchAge = s.nextInt();
+
+    // We need a search count to display the number of rows.
+    int searchCount = 0;
+
+    printTableHeader();
+
+    // Iterate over every pet in the database.
+    for (int i = 0; i < pets.length; i++) {
+      currentPet = pets[i];
+
+      // Once we hit a null value break from the loop
+      if (currentPet == null) break;
+      
+      // If the searched age matches the current pets age print the row.
+      if (currentPet.getAge() == searchAge) {
+        printTableRow(i, currentPet.getName(), currentPet.getAge());
+        searchCount++;
+      }
+    }
+    printTableFooter(searchCount);
   }
 
   // Method to print out a table with all pets in the database.
