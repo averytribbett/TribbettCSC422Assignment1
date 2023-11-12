@@ -52,6 +52,12 @@ public class PetDatabase {
       
       // Iterate over each line of our file we are reading.
       while (reader.hasNextLine()) {
+        // ERROR HANDLING: Print message and break from method if database if full.
+        if (petCount >= 5) {
+          System.out.println("Error: Database is full.");
+          break;
+        }
+
         // Save the current line and split each item.
         String line = reader.nextLine();
         String[] lineItems = line.split(" ");
@@ -137,6 +143,12 @@ public class PetDatabase {
       // Only run if user enters a name
       if (!input1.equals("done")) {
         input2 = s.nextInt();
+
+        // ERROR HANDLING: Print message and break from method if database if full.
+        if (petCount >= 5) {
+          System.out.println("Error: Database is full.");
+          break;
+        }
 
         // Find the first null value (ie first empty pet)
         // Set that null value to newly created pet
