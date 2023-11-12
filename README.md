@@ -19,3 +19,7 @@
 
 - Load the database from txt file.
 - Save the database to a txt file. 
+
+### Milestone 2 Features 
+
+- Error Handling: Database full message.
