@@ -150,16 +150,22 @@ public class PetDatabase {
           break;
         }
 
-        // Find the first null value (ie first empty pet)
-        // Set that null value to newly created pet
-        for (int i = 0; i < pets.length; i++) {
-          if (pets[i] == null) {
-            // Set new pet 
-            pets[i] = new Pet(input1, input2);
-            // Increment pet count.
-            petCount++;
-            break;
+        // If the age is valid add the pet to the database.
+        if (input2 <= 20 && input2 >= 1) {
+          // Find the first null value (ie first empty pet)
+          // Set that null value to newly created pet
+          for (int i = 0; i < pets.length; i++) {
+            if (pets[i] == null) {
+              // Set new pet 
+              pets[i] = new Pet(input1, input2);
+              // Increment pet count.
+              petCount++;
+              break;
+            }
           }
+          // If invalid age print error handling message.
+        } else {
+          System.out.println("Error: " + input2 + " is not a valid age.");
         }
       }
     }

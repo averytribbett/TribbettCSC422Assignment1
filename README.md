@@ -23,3 +23,4 @@
 ### Milestone 2 Features 
 
 - Error Handling: Database full message.
+- Error Handling: Check for valid age.
