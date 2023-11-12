@@ -24,3 +24,4 @@
 
 - Error Handling: Database full message.
 - Error Handling: Check for valid age.
+- Error Handling: Check input contains two items (name and age)
