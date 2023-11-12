@@ -14,3 +14,8 @@
 
 - Update Pet
 - Remove Pet
+
+### Milestone 1 Features
+
+- Load the database from txt file.
+- Save the database to a txt file. 

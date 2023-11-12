@@ -9,6 +9,8 @@
 import java.util.Scanner;
 import Pet.Pet;
 import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.lang.Integer;
 
 public class PetDatabase {
@@ -38,10 +40,12 @@ public class PetDatabase {
       }
     // Run while user does not enter 4
     } while (userChoice != 4);
+
+    saveDatabase();
   }
 
   // Method to load in a previously saved database.
-  static void loadDatabase() {
+  private static void loadDatabase() {
     try {
       // Open a scanner on our file.
       Scanner reader = new Scanner(dbFile);
@@ -64,6 +68,29 @@ public class PetDatabase {
       System.out.println("Error loading database. " + ex);
       System.exit(1);
     }  
+  }
+
+  // Method to save the state of the database at the end of the program.
+  private static void saveDatabase() {
+    // Delete the old file.
+    dbFile.delete();
+
+    // Create new blank file to write the current pet database state to.
+    try {
+      File newFile = new File("my_pets.txt");
+      newFile.createNewFile();
+
+      PrintWriter writer = new PrintWriter(newFile);
+
+      // Iterate over pets adding each name and age to a new line. 
+      // FORMAT: name age
+      for (int i = 0; i < petCount; i++) {
+        writer.println(pets[i].getName() + " " + pets[i].getAge());
+      }
+      writer.close();
+    } catch (IOException ex) {
+      System.out.println(ex);
+    }
   }
 
   // Method to get the choice of the method the user wants to run.

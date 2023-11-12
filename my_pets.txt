@@ -1,2 +1,2 @@
-macy 15
 duke 12
+macy 15
