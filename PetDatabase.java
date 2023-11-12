@@ -6,18 +6,22 @@
  * All Code written by Avery Tribbett 
  */
 
-
 import java.util.Scanner;
 import Pet.Pet;
+import java.io.File;
+import java.lang.Integer;
 
 public class PetDatabase {
   // Static variables used throughout the program.
-  static Pet[] pets = new Pet[100];
+  static Pet[] pets = new Pet[5];
   static Scanner s = new Scanner(System.in);
   static int petCount = 0;
+  static File dbFile = new File("my_pets.txt");
 
   public static void main(String[] args) {
     System.out.println("Pet Database Program");
+
+    loadDatabase();
 
     // Main loop get user choice and call corresponding method.
     int userChoice;
@@ -34,6 +38,32 @@ public class PetDatabase {
       }
     // Run while user does not enter 4
     } while (userChoice != 4);
+  }
+
+  // Method to load in a previously saved database.
+  static void loadDatabase() {
+    try {
+      // Open a scanner on our file.
+      Scanner reader = new Scanner(dbFile);
+      
+      // Iterate over each line of our file we are reading.
+      while (reader.hasNextLine()) {
+        // Save the current line and split each item.
+        String line = reader.nextLine();
+        String[] lineItems = line.split(" ");
+
+        // The first lineItem is the name, the second is the age. 
+        // Set the current pet equal to the current values.
+        pets[petCount] = new Pet(lineItems[0], Integer.parseInt(lineItems[1]));
+        // Increment petCount.
+        petCount++;
+      }
+      reader.close();
+    } catch (Exception ex) {
+      // If we can't load the database print message and exit program.
+      System.out.println("Error loading database. " + ex);
+      System.exit(1);
+    }  
   }
 
   // Method to get the choice of the method the user wants to run.
