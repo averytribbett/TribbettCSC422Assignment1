@@ -130,6 +130,11 @@ public class PetDatabase {
   // Method to allow user to add pets.
   // Stop when user types done or database is full.
   private static void addPets() {
+    // Clear line.
+    s.nextLine();
+    // Variable to store the entire line the user inputs.
+    String inputLine;
+
     // Input one is the name, two is the age.
     String input1 = "";
     int input2 = 0;
@@ -139,10 +144,21 @@ public class PetDatabase {
       // Get name and age
       System.out.print("add pet (name, age) or done when finished: ");
 
-      input1 = s.next();
+      // Set line and break up each item into string array.
+      inputLine = s.nextLine();
+      String[] inputItems = inputLine.split(" ");
+
+      // Error Handling check to make sure user inputs two values, 1 name and 1 age
+      if (inputItems.length != 2 && !inputItems[0].equals("done")) {
+        System.out.println("Error: " + inputLine + " is not a valid input.");
+        // We need to skip the next if block if input was invalid.
+        continue;
+      }
+
+      input1 = inputItems[0];
       // Only run if user enters a name
       if (!input1.equals("done")) {
-        input2 = s.nextInt();
+        input2 = Integer.parseInt(inputItems[1]);
 
         // ERROR HANDLING: Print message and break from method if database if full.
         if (petCount >= 5) {
