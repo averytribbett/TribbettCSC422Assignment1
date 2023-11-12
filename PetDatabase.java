@@ -1,17 +1,11 @@
 /*
  * PetDatabase.java - Allow user to manage a database of Pets.
  * Avery Tribbett - tribbeta@csp.edu
- * 11/04/23
- * CSC422 Assignement 1 - Version Control Practice
+ * 11/12/23
+ * CSC422 Assignement 2 - GitHub Issues, Milestones, and Projects Practice
  * All Code written by Avery Tribbett 
  */
 
-/* * * * * * * * * *
- *    Release 3    *
- * * * * * * * * * */
-
-/* Allow Users to add pets, view pets, update pets,
-  remove pets, search names and search ages */
 
 import java.util.Scanner;
 import Pet.Pet;
@@ -29,42 +23,41 @@ public class PetDatabase {
     int userChoice;
     do {
       System.out.println();
-      // Because of error handling this will always be 1 - 7
+      // Because of error handling this will always be 1 - 4
       userChoice = getUserChoice();
 
       switch (userChoice) {
         case 1 : viewAllPets(); break;
         case 2 : addPets(); break; 
-        case 3 : updatePet(); break;
-        case 4 : removePet(); break;
-        case 5 : searchPetsByName(); break;
-        case 6 : searchPetsByAge(); break;
+        case 3 : removePet(); break;
         default : System.out.println("Goodbye!"); 
       }
-    // Run while user does not enter 7
-    } while (userChoice != 7);
+    // Run while user does not enter 4
+    } while (userChoice != 4);
   }
 
   // Method to get the choice of the method the user wants to run.
   private static int getUserChoice() {
     int userChoice = 0;
-    // Make sure user enters 1 - 7
-    while (userChoice < 1 || userChoice > 7) {
+    // Make sure user enters 1 - 4
+    while (userChoice < 1 || userChoice > 4) {
       // Print options
       System.out.println("What would you like to do?");
       System.out.println(" 1) View all pets");
       System.out.println(" 2) Add more pets");
+      System.out.println(" 3) Remove an existing pet");
+      System.out.println(" 4) Exit program");
+      /* Options Not currently needed.
       System.out.println(" 3) Update an existing pet");
-      System.out.println(" 4) Remove an existing pet");
       System.out.println(" 5) Search pets by name");
       System.out.println(" 6) Search pets by age");
-      System.out.println(" 7) Exit program");
+      */
       System.out.print("Your choice: ");
       userChoice = s.nextInt();
 
       // Print error handling message if they enter an invalid number
-      if (userChoice < 1 || userChoice > 7) {
-        System.out.println("Enter a number 1 - 7");
+      if (userChoice < 1 || userChoice > 4) {
+        System.out.println("Enter a number 1 - 4");
       }
       System.out.println();
     }
@@ -104,6 +97,7 @@ public class PetDatabase {
   }
 
   // Method to change a pet 
+  /* Not needed for this assignment 
   private static void updatePet() {
     // Update user on current pets available to update.
     viewAllPets();
@@ -119,6 +113,7 @@ public class PetDatabase {
     pets[updateIndex].setAge(newAge);
     pets[updateIndex].setName(newName);
   }
+  */
 
   // Method to remove an existing pet. 
   private static void removePet() {
@@ -142,6 +137,7 @@ public class PetDatabase {
   }
 
   // Method to search all pets and display only those with matching name.
+  /* Not needed for this assignment 
   private static void searchPetsByName() {
     Pet currentPet;
 
@@ -170,7 +166,7 @@ public class PetDatabase {
     printTableFooter(searchCount);
   }
 
-  // Method to search all pets and display only those with matching age.
+  // Method to search all pets and display only those with matching age
   private static void searchPetsByAge() {
     Pet currentPet;
 
@@ -198,6 +194,7 @@ public class PetDatabase {
     }
     printTableFooter(searchCount);
   }
+  */
 
   // Method to print out a table with all pets in the database.
   private static void viewAllPets() {
