@@ -215,16 +215,28 @@ public class PetDatabase {
     System.out.print("Enter the pet ID to remove: ");
     int delIndex = s.nextInt();
 
-    // Shift each item after the pet deleted to the left (effectively deleting it)
-    for (int i = delIndex; i < pets.length - 1; i++) {
-      pets[i] = pets[i + 1];
-    }
-    // Set the last item to null (we do this in case the database is full).
-    // Because if DB is full the final item wont get shifted.
-    pets[pets.length - 1] = null;
+    // Check to make sure index is valid if valid delete.
+    if (delIndex >= 0 && delIndex <= petCount - 1) {
+      Pet petToDelete = pets[delIndex];
 
-    // Remove one from pet count.
-    petCount --;
+      // Shift each item after the pet deleted to the left (effectively deleting it)
+      for (int i = delIndex; i < pets.length - 1; i++) {
+        pets[i] = pets[i + 1];
+      }
+      // Set the last item to null (we do this in case the database is full).
+      // Because if DB is full the final item wont get shifted.
+      pets[pets.length - 1] = null;
+
+      // Remove one from pet count.
+      petCount --;
+
+      // Print success delete message.
+      System.out.println(petToDelete.getName() + " " + petToDelete.getAge() + " is removed.");
+
+      // If invalid index print error message.
+    } else {
+      System.out.println("Error: ID " + delIndex +  " does not exist.");
+    }
   }
 
   // Method to search all pets and display only those with matching name.
